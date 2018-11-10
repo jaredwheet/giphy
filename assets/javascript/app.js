@@ -30,50 +30,54 @@ function createButtons(array) {
 }
 createButtons(topics);
 
+// click event to take user input and create button
 $('#submit-btn').click(function () {
     var inputValue = $('#user-input').val().trim();
-    topics.push(inputValue);    
+    topics.push(inputValue);
     createButtons(topics);
 })
 
-
-$('.topic').click(function () {
-    $('.gifs').empty();
-    console.log("hello")
+//click event to render GIFS when button is clicked. 
+$(document).on('click', '.topic', function() {
+// $('.topic').click(function () {
+    $('.gifs').empty();    
     var topicName = $(this).attr("topic-name");
-    
+
     var queryURL = "http://api.giphy.com/v1/gifs/search?q="
-    + topicName
-    + "&api_key=sHB7DvK03v29Q84Qkq5OYkOseQR7fxPI&limit=10";
-    
+        + topicName
+        + "&api_key=sHB7DvK03v29Q84Qkq5OYkOseQR7fxPI&limit=10";
+
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        for (var i = 0; i < response.data.length; i++) {
+        for (var i = 0; i < response.data.length; i++) {            
             var imgURL = response.data[i].images.fixed_height_still.url;
             var gifURL = response.data[i].images.fixed_height.url;
-            var image = $('<img>');
-            image.addClass("gif-img")
-            image.attr("id", i);
-            image.attr("src", imgURL);
-            image.attr("image", imgURL)
-            $('.gifs').append(image);
-        }              
-        
+            var rating = response.data[i].rating
+            var imgRatingText = "Rating: " + rating.toUpperCase();
+            var imageDiv = `<div>
+                            <p>${imgRatingText}</p>
+                            <img id=${i} class= "gif-img" src = ${imgURL}  />                       
+                            </div>`                           
+            $('.gifs').append(imageDiv);
+                       
+            
+        }
+
         $('.gif-img').click(function () {
             var id = parseInt(this.id);
-            var gifURL = response.data[id].images.fixed_height.url;            
-            if (this.src === response.data[id].images.fixed_height_still.url) {                
+            var gifURL = response.data[id].images.fixed_height.url;
+            if (this.src === response.data[id].images.fixed_height_still.url) {
                 $('#' + id).attr("src", gifURL)
             }
-            else {                
+            else {
                 imgURL = response.data[id].images.fixed_height_still.url;
                 $('#' + id).attr("src", imgURL)
-                
+
             }
         })
     });
-    
-    
+
+
 })
