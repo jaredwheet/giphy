@@ -39,8 +39,8 @@ button :active {
     top:1px;
 }
      
-body {
-    font-family: 'Karla', sans-serif;
+body, div {
+    font-family: 'Black And White Picture', sans-serif;
 }
 
 input {
@@ -54,4 +54,13 @@ input {
 .gifs > div {
     margin: 10px;
 
+}
+
+.user-input-field{
+    font-family: 'Black And White Picture', sans-serif;
+    padding: 10px;
+}
+
+p {
+    font-family: 'Black And White Picture', sans-serif;
 }
