@@ -3,20 +3,7 @@ var topics = [
     "Football",
     "Basketball",
     "Hockey",
-    "Golf",
-    "Running",
-    "Soccer",
-    "Luge",
-    "Bobsled",
-    "Rugby",
-    "Tennis",
-    "Water Polo",
-    "Swimming",
-    "Rowing",
-    "Softball",
-    "Cricket",
-    "Curling",
-    "Horse Racing"
+    "Golf",    
 ];
 
 function createButtons(array) {
@@ -43,7 +30,7 @@ $(document).on('click', '.topic', function() {
     $('.gifs').empty();    
     var topicName = $(this).attr("topic-name");
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q="
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="
         + topicName
         + "&api_key=sHB7DvK03v29Q84Qkq5OYkOseQR7fxPI&limit=10";
 
